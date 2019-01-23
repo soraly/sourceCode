@@ -6,21 +6,21 @@ var reactOptions = {
   debugOutput: false
 };
 
-/**
-   @example
-   var r = react('filename, uid, cb').define(
-     loadUser,   'uid               -> err, user',
-     loadFile,   'filename          -> err, filedata',
-     markdown,   'filedata          -> returns html',
-     prepareDirectory, 'outDirname  -> err, dircreated', 
-     sendOutput, 'html, user        -> err, html, bytesWritten', {after:prepareDirectory}
-   ).callbackDef('err, html, user, bytesWritten');
+  // //  @example
+  //  var r = react('filename, uid, cb').define(
+  //    loadUser,   'uid               -> err, user',
+  //    loadFile,   'filename          -> err, filedata',
+  //    markdown,   'filedata          -> returns html',
+  //    prepareDirectory, 'outDirname  -> err, dircreated', 
+  //    sendOutput, 'html, user        -> err, html, bytesWritten', {after:prepareDirectory}
+  //  ).callbackDef('err, html, user, bytesWritten');
 
-   r.exec(filename, uid, function(err, html, user, bytesWritten){
-     //use html
-   });
+  //  r.exec(filename, uid, function(err, html, user, bytesWritten){
+  //    console.log(err, html, user, bytesWritten,'err, html, user, bytesWritten')
+  //    //use html
+  //  });
    
- */
+ 
 
 function fName(fn){
   return (typeof(fn) === 'string') ? fn : fn.name;
@@ -151,7 +151,7 @@ function react(inputDef){
           vCon[k] = (args[idx] !== undefined) ? args[idx] : null; //upgrade any undefined to null
         });
         task.status = STATUS.COMPLETE;
-        if (reactOptions.debugOutput) console.log('in callback: %s cb:', fName(task.f), args, vCon);
+        if (reactOptions.debugOutput) //console.log('in callback: %s cb:', fName(task.f), args, vCon);
         contExec();
       };
     }
@@ -168,7 +168,7 @@ function react(inputDef){
       t.status = STATUS.RUNNING;
       var args = t.a.map(function(k){ return vCon[k]; }); //get args from vCon
       if (t.cbFun) args.push(t.cbFun); //push custom callback to back if fn uses cb
-      if (reactOptions.debugOutput) console.log('starting task: %s', fName(t.f), args);
+      if (reactOptions.debugOutput) //console.log('starting task: %s', fName(t.f), args);
       try {
         var func;
         var bindObj = null; //start as global object

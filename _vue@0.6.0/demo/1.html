@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo" onclick="change()">
+            <p v-text="hello">test</p>
+            <p>2019.1.22</p>
+    </div>
+    <!-- 
+        <div id="demo" v-on="click:changeText">
+            <p v-text="hello"></p>
+        </div>
+
+        new Vue({
+            el: '#demo',
+            scope: {
+                hello: 'Hello World!',
+                changeText: function () {
+                    this.hello = 'Hello VueJS!'
+                }
+            }
+        })
+     -->
+    <script> //实现数据绑定，以及当数据改变时视图也改变
+        var data = {
+            hello: 'hello, world'
+        }
+        
+        function change(){
+            data.hello = 'hello, xiang';
+            compile()
+        }
+
+        function compile(){
+            var dom = document.querySelector('p[v-text="hello"]');
+            var attr = dom.getAttribute('v-text');
+            
+            dom.innerHTML = data[attr];
+        }
+
+        compile()
+    </script>
+</body>
+</html>

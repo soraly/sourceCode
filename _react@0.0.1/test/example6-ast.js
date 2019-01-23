@@ -5,14 +5,14 @@
  */
 
 var react = require('../react.js').react;
-var reactOptions = require('react').reactOptions;
+var reactOptions = require('../react.js').reactOptions;
 reactOptions.debugOutput = true;
 
-function loadUser(uid, cb){ setTimeout(cb, 100, null, "User"+uid); }
+function loadUser(uid, cb){ setTimeout(cb, 1000, null, "User"+uid); }
 function loadFile(filename, cb){ setTimeout(cb, 100, null, 'Filedata'+filename); }
 function markdown(filedata) { return 'html'+filedata; }
 function prepareDirectory(outDirname, cb){ setTimeout(cb, 200, null, 'dircreated-'+outDirname); }
-function writeOutput(html, user, cb){  setTimeout(cb, 300, null, html+'_bytesWritten'); }
+function writeOutput(html, user, cb){  setTimeout(cb, 3000, null, html+'_bytesWritten'); }
 function loadEmailTemplate(cb) { setTimeout(cb, 50, null, 'emailmd'); }
 function customizeEmail(user, emailHtml, cb) { return 'cust-'+user+emailHtml; }
 function deliverEmail(custEmailHtml, cb) { setTimeout(cb, 100, null, 'delivered-'+custEmailHtml); }
@@ -41,7 +41,7 @@ r.ast.taskDefs = [
 r.ast.finalOutputNames = ['html', 'user', 'bytesWritten'];
 
 r.exec("hello.txt", 100, 'outHello', useHtml);
-r.exec("small.txt", 200, 'outSmall', useHtml);
-r.exec("world.txt", 300, 'outWorld', useHtml);
+//r.exec("small.txt", 200, 'outSmall', useHtml);
+//r.exec("world.txt", 300, 'outWorld', useHtml);
 
 
